@@ -83,5 +83,5 @@ class Team(object):
                     projected_score = data['playerInfo']['players'][0]['currentPeriodProjectedStats']['appliedStatTotal']
                 else:
                     projected_score = 0
-                roster.append({'name':player_name,'position':position,'player_id':player_id,'actual score':player_score, 'projected_score':projected_score})
+                roster.append({'name':player_name,'position':position,'player_id':player_id,'actual_score':player_score, 'projected_score':projected_score})
         return roster
