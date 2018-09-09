@@ -8,6 +8,7 @@ class Team(object):
         self.division_name = data['division']['divisionName']
         self.wins = data['record']['overallWins']
         self.losses = data['record']['overallLosses']
+        self.ties = data['record']['overallTies']
         self.points_for = data['record']['pointsFor']
         self.points_against = data['record']['pointsAgainst']
         self.owner = "%s %s" % (data['owners'][0]['firstName'],
