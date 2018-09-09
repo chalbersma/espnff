@@ -51,7 +51,7 @@ class Team(object):
             'seasonId': self.year,
             'teamIds': self.team_id
         }
-        roster_slots = {0:'QB',2:'RB',4:'WR',6:'TE',23:'FLEX',16:'D/ST',17:'K',20:'Bench'}
+        roster_slots = {0:'QB',2:'RB',4:'WR',6:'TE',23:'FLEX',16:'D/ST',17:'K',18:'P',19:'Coach',20:'Bench',21:'IR'}
         if week is not None:
             params['scoringPeriodId'] = week
         r = requests.get('%srosterInfo' % (self.ENDPOINT, ), params=params, cookies=self.cookies)
@@ -62,7 +62,11 @@ class Team(object):
         for p in players:
             if 'player' in p:
                 player_name = ('%s %s' %(p['player']['firstName'],p['player']['lastName']))
-                position = roster_slots[p['slotCategoryId']]
+                try:
+                    position = roster_slots[p['slotCategoryId']]
+                except Exception as roster_error:
+                    print("Unknonw Roster {} Slot : {}".format(str(roster_error), p))
+                    break
                 player_id = p['player']['playerId']
                 params = {
                     'leagueId' : self.league_id,
